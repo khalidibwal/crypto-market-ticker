@@ -12,27 +12,27 @@ const App = () =>{
     const columns = React.useMemo(() => [
         {
           Header: "Name",
-          accessor: 'symbol',
+          accessor: 'assetCode',
           Cell: AvatarCell,
           imgAccessor: "fullLogoUrl",
           emailAccessor: "email",
         },
         {
-          Header: "Title",
-          accessor: 'assetCode',
+          Header: "Last Price",
+          accessor: 's',
         },
         {
-          Header: "Status",
+          Header: "24h Change",
           accessor: 'status',
           Cell: StatusPill,
         },
         {
-          Header: "Age",
+          Header: "Market Cap",
           accessor: 'age',
         },
         {
-          Header: "Role",
-          accessor: 'role',
+          Header: "Tags",
+          accessor: 'tags',
           Filter: SelectColumnFilter,  // new
           filter: 'includes',
         },
@@ -47,8 +47,7 @@ const App = () =>{
       
       // Return our response in the allData variable as an array
       await Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{data: ticker}, {data: asset}] )=> {
-        console.log(asset.data)
-        console.log(ticker)
+       setTableData(asset.data)
       });
        
       }
