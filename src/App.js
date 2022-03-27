@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 // import {binanceTicker,GetAllasset} from './Database/Api'
-import Table, { AvatarCell, SelectColumnFilter, StatusPill } from './Component/main/Table'
+import Table, { AvatarCell, SelectColumnFilter, StatusPill, ButtonCell, Curencydlr } from './Component/main/Table'
 import {ContextGen} from './Context/ContextGen';
 import axios from 'axios';
 
@@ -15,11 +15,12 @@ const App = () =>{
           accessor: 'assetCode',
           Cell: AvatarCell,
           imgAccessor: "fullLogoUrl",
-          emailAccessor: "email",
+          emailAccessor: "assetName",
         },
         {
+          Cell: Curencydlr,
           Header: "Last Price",
-          accessor: 's',
+          accessor: 'freeUserChargeAmount',
         },
         {
           Header: "24h Change",
@@ -33,7 +34,12 @@ const App = () =>{
         {
           Header: "Tags",
           accessor: 'tags',
-          Filter: SelectColumnFilter,  // new
+          Filter: SelectColumnFilter,  // Filter Tags from crypto
+          filter: 'includes',
+        },
+        {
+          accessor: 'unknown',
+          Cell: ButtonCell,
           filter: 'includes',
         },
       ], [])
@@ -53,8 +59,12 @@ const App = () =>{
       }
     
       useEffect(() => {
-        getData();
+      const intervalId = setInterval(() => {
+        getData()
+      }, 5000)
+      return () => clearInterval(intervalId); //refresh page 5 second because 2 second are just to short from my opinion
       }, []);
+
     
     return(
         <ContextGen.Provider value={{tableData, setTableData, assetdata,setAssetData, sortField, setSortField, order, setOrder}}>        

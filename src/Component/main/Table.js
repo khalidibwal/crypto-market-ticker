@@ -1,46 +1,4 @@
-// import { useContext } from "react";
-// import TableBody from "./TableBody";
-// import TableHead from "./TableHead";
-// import { ContextGen } from "../../Context/ContextGen";
 
-// const Table = () => {
-//   const {tableData, setTableData} = useContext(ContextGen)
-
-//   const columns = [
-//     { label: "Name", accessor: "symbol", sortable: true },
-//     { label: "Last Price", accessor: "lastPrice", sortable: false },
-//     { label: "24h Change", accessor: "change", sortable: true },
-//     { label: "Market Cap", accessor: "market_cap", sortable: true },
-//   ];
-
-//   const handleSorting = (sortField, sortOrder) => {
-//     if (sortField) {
-//       const sorted = [...tableData].sort((a, b) => {
-//         if (a[sortField] === null) return 1;
-//         if (b[sortField] === null) return -1;
-//         if (a[sortField] === null && b[sortField] === null) return 0;
-//         return (
-//           a[sortField].toString().localeCompare(b[sortField].toString(), "en", {
-//             numeric: true,
-//           }) * (sortOrder === "asc" ? 1 : -1)
-//         );
-//       });
-//       setTableData(sorted);
-//     }
-//   };
-
-//   return (
-//     <>
-//       <table className="table">
-
-//         <TableHead {...{ columns, handleSorting }} />
-//         <TableBody {...{ columns, tableData }} />
-//       </table>
-//     </>
-//   );
-// };
-
-// export default Table;
 
 import React from 'react'
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy, usePagination } from 'react-table'
@@ -145,6 +103,27 @@ export function AvatarCell({ value, column, row }) {
       <div className="ml-4">
         <div className="text-sm font-medium text-gray-900">{value}</div>
         <div className="text-sm text-gray-500">{row.original[column.emailAccessor]}</div>
+      </div>
+    </div>
+  )
+}
+export function Curencydlr({value}) {
+  return (
+    <div className="flex items-center">
+      <div className="ml-4">
+        <div className="text-sm font-medium text-gray-900">${value}</div>
+
+      </div>
+    </div>
+  )
+}
+export function ButtonCell() {
+  return (
+    <div className="flex items-center">
+      <div className="flex-shrink-0 h-10 w-10">
+      <button class="bg-transparent hover:bg-blue-100 text-yellow-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        Trade
+      </button>
       </div>
     </div>
   )
