@@ -49,7 +49,6 @@ const App = () =>{
       await Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{data: ticker}, {data: asset}] )=> {
         console.log(asset.data)
         console.log(ticker)
-        // setAssetData(asset.data)
       });
        
       }
